@@ -3,8 +3,8 @@ import sqlite3, requests
 
 app = Flask(__name__)
 DB = "orders.db"
-USERS_URL = "http://users-service:5001"
-PRODUCTS_URL = "http://products-service:5002"
+USERS_URL = "ecommerce-microservices-production.up.railway.app"
+PRODUCTS_URL = "clever-appreciation-production-a91f.up.railway.app"
 
 def init_db():
     conn = sqlite3.connect(DB)

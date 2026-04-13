@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
-import sqlite3
+import sqlite3, os
 
 app = Flask(__name__)
-DB = "users.db"
+DB = "/tmp/users.db"
 
 def init_db():
     conn = sqlite3.connect(DB)
@@ -13,6 +13,9 @@ def init_db():
     )""")
     conn.commit()
     conn.close()
+
+# ← appelé ici, en dehors du if __main__
+init_db()
 
 @app.route("/users", methods=["GET"])
 def get_users():
@@ -40,6 +43,5 @@ def create_user():
     return jsonify({"message": "User created"}), 201
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port)
